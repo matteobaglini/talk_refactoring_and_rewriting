@@ -1,0 +1,17 @@
+.idea/
+.vscode
+.classpath
+.project
+.settings/
+*.iml
+.DS_Store
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+target/
+/.mvn
+/.maven
+/.repository
+.flattened-pom.xml
