@@ -1,8 +1,9 @@
 package io.doubleloop;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 public class LoadEmployeesCelebratingBirthdayOn_New
@@ -17,6 +18,11 @@ public class LoadEmployeesCelebratingBirthdayOn_New
 
   @Override
   public List<Employee> execute() throws IOException {
-    return Collections.emptyList();
+    final int HEADER = 1;
+    return Files.readAllLines(Path.of(fileName)).stream()
+        .skip(HEADER)
+        .map(Employee::parse)
+        .filter(e -> e.isBirthday(today))
+        .toList();
   }
 }
