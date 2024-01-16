@@ -12,7 +12,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class LoadEmployeesCelebratingBirthdayOn_OldTest {
+class LoadEmployeesCelebratingBirthdayOn_OldTest
+    extends LoadEmployeesCelebratingBirthdayOnContractTest {
   private Path testDataPath;
 
   @BeforeEach
