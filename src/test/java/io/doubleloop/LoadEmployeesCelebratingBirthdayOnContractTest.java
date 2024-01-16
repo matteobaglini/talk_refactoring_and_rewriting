@@ -3,6 +3,7 @@ package io.doubleloop;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public abstract class LoadEmployeesCelebratingBirthdayOnContractTest {
   private Path testDataPath;
@@ -83,5 +85,15 @@ public abstract class LoadEmployeesCelebratingBirthdayOnContractTest {
     assertThat(employees.size()).isEqualTo(2);
     assertThat(employees.get(0).getFirstName()).isEqualTo("John");
     assertThat(employees.get(1).getFirstName()).isEqualTo("Mario");
+  }
+
+  @Test
+  void missingFile() throws Exception {
+    final var filePath = "unknown.txt";
+
+    assertThatThrownBy(() -> {
+      createLoadEmployeesCelebratingBirthdayOn(filePath, date("2024/10/08")).execute();
+    }).isInstanceOf(FileNotFoundException.class)
+        .hasMessageContaining(filePath);
   }
 }
