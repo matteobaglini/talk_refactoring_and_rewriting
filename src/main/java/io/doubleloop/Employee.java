@@ -16,6 +16,11 @@ public class Employee {
     this.email = email;
   }
 
+  public static Employee parse(String value) {
+    final var parts = value.split(", ");
+    return new Employee(parts[1], parts[0], parts[2], parts[3]);
+  }
+
   public String getEmail() {
     return email;
   }

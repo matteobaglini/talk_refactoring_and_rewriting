@@ -21,13 +21,15 @@ public class LoadEmployeesCelebratingBirthdayOn {
     String str = in.readLine(); // skip header
     final var employees = new ArrayList<Employee>();
     while ((str = in.readLine()) != null) {
-      // Parse employee data
-      String[] employeeData = str.split(", ");
-      Employee employee = new Employee(employeeData[1], employeeData[0], employeeData[2], employeeData[3]);
+
+      // REFACTOR: extract and method construction method
+      final var employee = Employee.parse(str);
+
       if (employee.isBirthday(today)) {
         employees.add(employee);
       }
     }
     return employees;
   }
+
 }
