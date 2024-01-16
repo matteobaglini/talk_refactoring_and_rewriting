@@ -2,6 +2,7 @@ package io.doubleloop;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 public class LoadEmployeesCelebratingBirthdayOn_New
@@ -16,7 +17,6 @@ public class LoadEmployeesCelebratingBirthdayOn_New
 
   @Override
   public List<Employee> execute() throws IOException {
-    // TODO: implement me ;-)
-    return null;
+    return Collections.emptyList();
   }
 }
