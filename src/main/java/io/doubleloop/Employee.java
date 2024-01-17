@@ -2,6 +2,7 @@ package io.doubleloop;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Employee {
   private LocalDate date;
@@ -21,6 +22,12 @@ public class Employee {
     return new Employee(parts[1], parts[0], parts[2], parts[3]);
   }
 
+  public String toLine() {
+    return String.format(
+        "%s, %s, %s, %s",
+        lastName, firstName, date.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")), email);
+  }
+
   public String getEmail() {
     return email;
   }
@@ -35,11 +42,27 @@ public class Employee {
 
   @Override
   public String toString() {
-    return "Employee{" +
-        "date=" + date +
-        ", lastName='" + lastName + '\'' +
-        ", firstName='" + firstName + '\'' +
-        ", email='" + email + '\'' +
-        '}';
+    return "Employee{"
+        + "date=" + date
+        + ", lastName='" + lastName + '\''
+        + ", firstName='" + firstName + '\''
+        + ", email='" + email + '\''
+        + '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Employee employee = (Employee) o;
+    return Objects.equals(date, employee.date)
+        && Objects.equals(lastName, employee.lastName)
+        && Objects.equals(firstName, employee.firstName)
+        && Objects.equals(email, employee.email);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(date, lastName, firstName, email);
   }
 }
