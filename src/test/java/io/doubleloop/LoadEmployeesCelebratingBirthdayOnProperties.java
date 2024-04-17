@@ -1,7 +1,6 @@
 package io.doubleloop;
 
 import io.vavr.Tuple;
-import io.vavr.collection.Stream;
 import io.vavr.test.Arbitrary;
 import io.vavr.test.Gen;
 import io.vavr.test.Property;
@@ -18,8 +17,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import static io.vavr.test.Checkable.RNG;
-
 public class LoadEmployeesCelebratingBirthdayOnProperties {
   private Path testDataPath;
   private final ArbitraryEmployee arbitraryEmployee = new ArbitraryEmployee();
@@ -33,14 +30,19 @@ public class LoadEmployeesCelebratingBirthdayOnProperties {
   }
 
   @Test
-  void canLoadAndParseRandomValues() throws Exception {
-    Property.def("generate file")
+  void oracleTest() throws Exception {
+    Property.def("new implementation respect old implementation")
         .forAll(arbitraryEmployee)
         .suchThat(
             employee -> {
               final var filePath = employeeFile(List.of(header(), employee.toLine()));
-              new LoadEmployeesCelebratingBirthdayOn_Old(filePath, date("2024/10/08")).execute();
-              return true;
+              final var expected =
+                  new LoadEmployeesCelebratingBirthdayOn_Old(filePath, date("2024/10/08"))
+                      .execute();
+              final var actual =
+                  new LoadEmployeesCelebratingBirthdayOn_New(filePath, date("2024/10/08"))
+                      .execute();
+              return actual.equals(expected);
             })
         .check()
         .assertIsSatisfied();
