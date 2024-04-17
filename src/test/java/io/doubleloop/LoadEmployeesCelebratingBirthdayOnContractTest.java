@@ -1,6 +1,7 @@
 package io.doubleloop;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,6 +10,8 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class LoadEmployeesCelebratingBirthdayOnContractTest {
   private Path testDataPath;
@@ -26,6 +29,17 @@ public abstract class LoadEmployeesCelebratingBirthdayOnContractTest {
     filePath.toFile().deleteOnExit();
     Files.write(filePath, Arrays.asList(lines));
     return filePath.toString();
+  }
+
+  @Test
+  void noEmployeeCelebrateBirthday() throws Exception {
+    final var filePath = employeeFile(
+        header(),
+        line("Ann, Mary, 1975/03/11, mary.ann@foobar.com")
+    );
+    final var employees = createLoadEmployeesCelebratingBirthdayOn(filePath, "2024/10/08").execute();
+
+    assertThat(employees.size()).isEqualTo(0);
   }
 
   protected abstract LoadEmployeesCelebratingBirthdayOnContract createLoadEmployeesCelebratingBirthdayOn(String filePath, String today);
