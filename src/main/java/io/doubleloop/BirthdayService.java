@@ -6,12 +6,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 public class BirthdayService {
 
@@ -20,7 +16,8 @@ public class BirthdayService {
 
     // REFACTORING: Replace Method/Function with Object (https://refactoring.com/catalog/replaceFunctionWithCommand.html)
 
-    final var employeesCelebratingBirthday = loadEmployeesCelebratingBirthdayOn(fileName, today);
+    // REFACTORING STEP: create and call the object
+    final var employeesCelebratingBirthday = new LoadEmployeesCelebratingBirthdayOn(fileName, today).execute();
 
     for (final var employee : employeesCelebratingBirthday) {
       // Create message
@@ -46,25 +43,4 @@ public class BirthdayService {
     }
   }
 
-  private static ArrayList<Employee> loadEmployeesCelebratingBirthdayOn(String fileName, LocalDate today) throws IOException {
-    final var employeesCelebratingBirthday = new ArrayList<Employee>();
-
-    BufferedReader in = new BufferedReader(new FileReader(fileName));
-    String str = in.readLine(); // skip header
-    while ((str = in.readLine()) != null) {
-      // Parse employee data
-      String[] employeeData = str.split(", ");
-      Employee employee = new Employee(
-          employeeData[1],
-          employeeData[0],
-          LocalDate.parse(employeeData[2], DateTimeFormatter.ofPattern("yyyy/MM/dd")),
-          employeeData[3]);
-
-      // Check birthday
-      if (employee.isBirthday(today)) {
-        employeesCelebratingBirthday.add(employee);
-      }
-    }
-    return employeesCelebratingBirthday;
-  }
 }
