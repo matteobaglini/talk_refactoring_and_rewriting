@@ -1,17 +1,17 @@
 package io.doubleloop;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class BirthdayService {
 
@@ -37,29 +37,31 @@ public class BirthdayService {
       // Check birthday
       if (employee.isBirthday(today)) {
         employeesCelebratingBirthday.add(employee);
-        
-        // Create message
-        String recipient = employee.email();
-        String body = "Happy Birthday, dear %NAME%".replace("%NAME%", employee.firstName());
-        String subject = "Happy Birthday!";
-
-        // Create a mail session
-        java.util.Properties props = new java.util.Properties();
-        props.put("mail.smtp.host", smtpHost);
-        props.put("mail.smtp.port", "" + smtpPort);
-        Session session = Session.getInstance(props, null);
-
-        // Construct the message
-        Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress("sender@here.com"));
-        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-        msg.setSubject(subject);
-        msg.setText(body);
-
-        // Send the message
-        Transport.send(msg);
       }
     }
-  }
 
+    // REFACTORING STEP: split responsibility in a different loop
+    for (final var employee : employeesCelebratingBirthday) {
+      // Create message
+      String recipient = employee.email();
+      String body = "Happy Birthday, dear %NAME%".replace("%NAME%", employee.firstName());
+      String subject = "Happy Birthday!";
+
+      // Create a mail session
+      java.util.Properties props = new java.util.Properties();
+      props.put("mail.smtp.host", smtpHost);
+      props.put("mail.smtp.port", "" + smtpPort);
+      Session session = Session.getInstance(props, null);
+
+      // Construct the message
+      Message msg = new MimeMessage(session);
+      msg.setFrom(new InternetAddress("sender@here.com"));
+      msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+      msg.setSubject(subject);
+      msg.setText(body);
+
+      // Send the message
+      Transport.send(msg);
+    }
+  }
 }
