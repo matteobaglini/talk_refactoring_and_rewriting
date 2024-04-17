@@ -2,7 +2,7 @@ package io.doubleloop;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-// REFACTORING: introduce contract tests
+// REFACTORING: gain more coverage with ApprovalTests
 
 public class LoadEmployeesCelebratingBirthdayOn_OldTest extends LoadEmployeesCelebratingBirthdayOnContractTest {
   @Override

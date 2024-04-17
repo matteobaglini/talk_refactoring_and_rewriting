@@ -15,3 +15,6 @@ target/
 /.maven
 /.repository
 .flattened-pom.xml
+
+### Approval exclusion ###
+*.received.*
