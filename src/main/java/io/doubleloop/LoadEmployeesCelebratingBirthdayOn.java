@@ -23,10 +23,6 @@ public class LoadEmployeesCelebratingBirthdayOn {
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String str = in.readLine(); // skip header
     while ((str = in.readLine()) != null) {
-
-      // REFACTORING: extract method/function
-
-      // Parse employee data
       var employee = parseLine(str);
 
       // Check birthday
