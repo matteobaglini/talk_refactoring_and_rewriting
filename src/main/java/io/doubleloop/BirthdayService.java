@@ -17,6 +17,10 @@ public class BirthdayService {
 
   public void sendGreetings(String fileName, LocalDate today, String smtpHost, int smtpPort)
       throws IOException, MessagingException {
+
+    // REFACTORING: extract method/function (https://refactoring.com/catalog/extractFunction.html)
+
+    // REFACTORING STEP: select extract the code
     final var employeesCelebratingBirthday = new ArrayList<Employee>();
 
     BufferedReader in = new BufferedReader(new FileReader(fileName));
