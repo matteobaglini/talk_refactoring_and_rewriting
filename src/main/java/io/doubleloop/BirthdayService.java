@@ -17,6 +17,8 @@ public class BirthdayService {
   public void sendGreetings(String fileName, LocalDate today, String smtpHost, int smtpPort)
       throws IOException, MessagingException {
 
+    // REFACTORING: split loop (https://refactoring.com/catalog/splitLoop.html)
+
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String str = in.readLine(); // skip header
     while ((str = in.readLine()) != null) {
