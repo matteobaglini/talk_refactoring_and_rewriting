@@ -12,6 +12,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+// REFACTORING: introduce contract tests
+
+// REFACTORING STEP: extract interface
 public class LoadEmployeesCelebratingBirthdayOn_OldTest {
   private Path testDataPath;
 
