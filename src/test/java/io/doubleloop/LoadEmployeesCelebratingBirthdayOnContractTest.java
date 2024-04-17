@@ -1,5 +1,8 @@
 package io.doubleloop;
 
+import org.approvaltests.Approvals;
+import org.approvaltests.combinations.CombinationApprovals;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +20,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public abstract class LoadEmployeesCelebratingBirthdayOnContractTest {
   private Path testDataPath;
+
+  @BeforeAll
+  static void beforeAll() {
+    Approvals.settings().allowMultipleVerifyCallsForThisClass();
+  }
 
   @BeforeEach
   void setUp() {
@@ -95,5 +103,26 @@ public abstract class LoadEmployeesCelebratingBirthdayOnContractTest {
     assertThat(employees.size()).isEqualTo(2);
     assertThat(employees.get(0).firstName()).isEqualTo("John");
     assertThat(employees.get(1).firstName()).isEqualTo("Mario");
+  }
+
+  @Test
+  void combinationTests() throws Exception {
+    final var filePath =
+        employeeFile(
+            header(),
+            line("Doe, John, 1982/10/08, john.doe@foobar.com"),
+            line("Ann, Mary, 1975/03/11, mary.ann@foobar.com"),
+            line("Rossi, Mario, 2000/10/08, mario.rossi@foobar.com"));
+
+    CombinationApprovals.verifyAllCombinations(
+        (file, today) -> {
+          try {
+            return createLoadEmployeesCelebratingBirthdayOn(file, today).execute();
+          } catch (IOException e) {
+            throw new RuntimeException(e);
+          }
+        },
+        new String[] {filePath},
+        new String[] {"2024/10/08", "2024/10/09", "2024/03/11"});
   }
 }
