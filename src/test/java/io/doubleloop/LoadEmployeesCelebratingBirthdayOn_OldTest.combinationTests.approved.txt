@@ -1,0 +1,3 @@
+[test-data-bs/employee_data.txt, 2024/10/08] => [Employee[firstName=John, lastName=Doe, birthDate=1982-10-08, email=john.doe@foobar.com], Employee[firstName=Mario, lastName=Rossi, birthDate=2000-10-08, email=mario.rossi@foobar.com]] 
+[test-data-bs/employee_data.txt, 2024/10/09] => [] 
+[test-data-bs/employee_data.txt, 2024/03/11] => [Employee[firstName=Mary, lastName=Ann, birthDate=1975-03-11, email=mary.ann@foobar.com]] 
