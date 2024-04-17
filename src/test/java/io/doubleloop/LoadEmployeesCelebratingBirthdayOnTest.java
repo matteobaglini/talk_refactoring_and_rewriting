@@ -16,7 +16,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LoadEmployeesCelebratingBirthdayOn_NewTest {
+public class LoadEmployeesCelebratingBirthdayOnTest {
   private Path testDataPath;
 
   @BeforeEach
@@ -40,7 +40,7 @@ public class LoadEmployeesCelebratingBirthdayOn_NewTest {
         header(),
         line("Ann, Mary, 1975/03/11, mary.ann@foobar.com")
     );
-    final var employees = new LoadEmployeesCelebratingBirthdayOn_New(filePath, date("2024/10/08")).execute();
+    final var employees = new LoadEmployeesCelebratingBirthdayOn(filePath, date("2024/10/08")).execute();
 
     assertThat(employees.size()).isEqualTo(0);
   }
@@ -50,7 +50,7 @@ public class LoadEmployeesCelebratingBirthdayOn_NewTest {
     final var filePath = "unknown.txt";
 
     assertThatThrownBy(() -> {
-       new LoadEmployeesCelebratingBirthdayOn_New(filePath, date("2024/10/08")).execute();
+       new LoadEmployeesCelebratingBirthdayOn(filePath, date("2024/10/08")).execute();
     }).isInstanceOf(FileNotFoundException.class)
         .hasMessageContaining(filePath);
   }
@@ -74,7 +74,7 @@ public class LoadEmployeesCelebratingBirthdayOn_NewTest {
         line("Doe, John, 1982/10/08, john.doe@foobar.com"),
         line("Ann, Mary, 1975/03/11, mary.ann@foobar.com")
     );
-    final var employees = new LoadEmployeesCelebratingBirthdayOn_New(filePath, date("2024/10/08")).execute();
+    final var employees = new LoadEmployeesCelebratingBirthdayOn(filePath, date("2024/10/08")).execute();
 
     assertThat(employees.size()).isEqualTo(1);
     assertThat(employees.get(0).firstName()).isEqualTo("John");
@@ -89,7 +89,7 @@ public class LoadEmployeesCelebratingBirthdayOn_NewTest {
         line("Ann, Mary, 1975/03/11, mary.ann@foobar.com"),
         line("Rossi, Mario, 2000/10/08, mario.rossi@foobar.com")
     );
-    final var employees = new LoadEmployeesCelebratingBirthdayOn_New(filePath, date("2024/10/08")).execute();
+    final var employees = new LoadEmployeesCelebratingBirthdayOn(filePath, date("2024/10/08")).execute();
 
     assertThat(employees.size()).isEqualTo(2);
     assertThat(employees.get(0).firstName()).isEqualTo("John");
@@ -108,7 +108,7 @@ public class LoadEmployeesCelebratingBirthdayOn_NewTest {
     CombinationApprovals.verifyAllCombinations(
         (file, today) -> {
           try {
-            return new LoadEmployeesCelebratingBirthdayOn_New(file, date(today)).execute();
+            return new LoadEmployeesCelebratingBirthdayOn(file, date(today)).execute();
           } catch (IOException e) {
             throw new RuntimeException(e);
           }
