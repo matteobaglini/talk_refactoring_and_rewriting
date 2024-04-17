@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 // REFACTORING: introduce contract tests
 
+// REFACTORING STEP: introduce template method pattern
 public class LoadEmployeesCelebratingBirthdayOn_OldTest extends LoadEmployeesCelebratingBirthdayOnContractTest {
 
   @Test
