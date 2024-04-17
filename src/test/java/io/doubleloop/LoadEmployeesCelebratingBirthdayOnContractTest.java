@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-public class LoadEmployeesCelebratingBirthdayOnContractTest {
+public abstract class LoadEmployeesCelebratingBirthdayOnContractTest {
   private Path testDataPath;
 
   @BeforeEach
@@ -27,6 +27,8 @@ public class LoadEmployeesCelebratingBirthdayOnContractTest {
     Files.write(filePath, Arrays.asList(lines));
     return filePath.toString();
   }
+
+  protected abstract LoadEmployeesCelebratingBirthdayOnContract createLoadEmployeesCelebratingBirthdayOn(String filePath, String today);
 
   protected String line(final String text) {
     return text;
