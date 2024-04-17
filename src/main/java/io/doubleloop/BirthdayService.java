@@ -18,11 +18,7 @@ public class BirthdayService {
   public void sendGreetings(String fileName, LocalDate today, String smtpHost, int smtpPort)
       throws IOException, MessagingException {
 
-    // REFACTORING: extract method/function (https://refactoring.com/catalog/extractFunction.html)
-
-    // REFACTORING STEP: use a meaningful name
-    // Naming things is an iterative process: start with a "Get to honest"
-    // (https://www.digdeeproots.com/articles/on/naming-process/)
+    // NOTE: use the extracted method as indirection level and as primary bottleneck
     final var employeesCelebratingBirthday = loadEmployeesCelebratingBirthdayOn(fileName, today);
 
     for (final var employee : employeesCelebratingBirthday) {
