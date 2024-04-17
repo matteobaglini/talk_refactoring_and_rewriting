@@ -7,10 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-// REFACTORING: branch by abstraction (https://martinfowler.com/bliki/BranchByAbstraction.html)
-
-// REFACTOR STEP: extract interface
-public class LoadEmployeesCelebratingBirthdayOn_Old {
+public class LoadEmployeesCelebratingBirthdayOn_Old implements LoadEmployeesCelebratingBirthdayOnContract {
   private final String fileName;
   private final LocalDate today;
 
@@ -19,6 +16,7 @@ public class LoadEmployeesCelebratingBirthdayOn_Old {
     this.today = today;
   }
 
+  @Override
   public List<Employee> execute() throws IOException {
     final var result = new ArrayList<Employee>();
 
