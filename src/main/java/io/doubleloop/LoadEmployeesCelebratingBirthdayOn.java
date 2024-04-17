@@ -33,6 +33,7 @@ public class LoadEmployeesCelebratingBirthdayOn {
     return result;
   }
 
+  // REFACTORING: Move method/function (https://refactoring.com/catalog/moveFunction.html)
   private static Employee parseLine(String str) {
     String[] employeeData = str.split(", ");
     Employee employee = new Employee(
