@@ -13,6 +13,12 @@ public record Employee(String firstName, String lastName, LocalDate birthDate, S
         employeeData[3]);
   }
 
+  public String toLine() {
+    return String.format(
+        "%s, %s, %s, %s",
+        lastName, firstName, birthDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")), email);
+  }
+
   public boolean isBirthday(LocalDate now) {
     return birthDate.getMonth() == now.getMonth()
         && birthDate.getDayOfMonth() == now.getDayOfMonth();

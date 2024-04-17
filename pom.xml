@@ -49,6 +49,12 @@
             <version>22.3.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.vavr</groupId>
+            <artifactId>vavr-test</artifactId>
+            <version>0.10.4</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

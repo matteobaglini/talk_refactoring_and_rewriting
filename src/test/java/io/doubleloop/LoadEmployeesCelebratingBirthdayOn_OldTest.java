@@ -1,7 +1,5 @@
 package io.doubleloop;
 
-// REFACTORING: gain more coverage with ApprovalTests
-
 public class LoadEmployeesCelebratingBirthdayOn_OldTest extends LoadEmployeesCelebratingBirthdayOnContractTest {
   @Override
   protected LoadEmployeesCelebratingBirthdayOnContract createLoadEmployeesCelebratingBirthdayOn(String filePath, String today) {
