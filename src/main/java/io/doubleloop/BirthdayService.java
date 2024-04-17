@@ -20,25 +20,10 @@ public class BirthdayService {
 
     // REFACTORING: extract method/function (https://refactoring.com/catalog/extractFunction.html)
 
-    // REFACTORING STEP: select extract the code
-    final var employeesCelebratingBirthday = new ArrayList<Employee>();
-
-    BufferedReader in = new BufferedReader(new FileReader(fileName));
-    String str = in.readLine(); // skip header
-    while ((str = in.readLine()) != null) {
-      // Parse employee data
-      String[] employeeData = str.split(", ");
-      Employee employee = new Employee(
-          employeeData[1],
-          employeeData[0],
-          LocalDate.parse(employeeData[2], DateTimeFormatter.ofPattern("yyyy/MM/dd")),
-          employeeData[3]);
-
-      // Check birthday
-      if (employee.isBirthday(today)) {
-        employeesCelebratingBirthday.add(employee);
-      }
-    }
+    // REFACTORING STEP: use a meaningful name
+    // Naming things is an iterative process: start with a "Get to honest"
+    // (https://www.digdeeproots.com/articles/on/naming-process/)
+    final var employeesCelebratingBirthday = loadEmployeesCelebratingBirthdayOn(fileName, today);
 
     for (final var employee : employeesCelebratingBirthday) {
       // Create message
@@ -62,5 +47,27 @@ public class BirthdayService {
       // Send the message
       Transport.send(msg);
     }
+  }
+
+  private static ArrayList<Employee> loadEmployeesCelebratingBirthdayOn(String fileName, LocalDate today) throws IOException {
+    final var employeesCelebratingBirthday = new ArrayList<Employee>();
+
+    BufferedReader in = new BufferedReader(new FileReader(fileName));
+    String str = in.readLine(); // skip header
+    while ((str = in.readLine()) != null) {
+      // Parse employee data
+      String[] employeeData = str.split(", ");
+      Employee employee = new Employee(
+          employeeData[1],
+          employeeData[0],
+          LocalDate.parse(employeeData[2], DateTimeFormatter.ofPattern("yyyy/MM/dd")),
+          employeeData[3]);
+
+      // Check birthday
+      if (employee.isBirthday(today)) {
+        employeesCelebratingBirthday.add(employee);
+      }
+    }
+    return employeesCelebratingBirthday;
   }
 }
