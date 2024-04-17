@@ -17,10 +17,6 @@ public class BirthdayService {
 
   public void sendGreetings(String fileName, LocalDate today, String smtpHost, int smtpPort)
       throws IOException, MessagingException {
-
-    // REFACTORING: split loop (https://refactoring.com/catalog/splitLoop.html)
-
-    // REFACTORING STEP: declare and use accumulator
     final var employeesCelebratingBirthday = new ArrayList<Employee>();
 
     BufferedReader in = new BufferedReader(new FileReader(fileName));
@@ -40,7 +36,6 @@ public class BirthdayService {
       }
     }
 
-    // REFACTORING STEP: split responsibility in a different loop
     for (final var employee : employeesCelebratingBirthday) {
       // Create message
       String recipient = employee.email();
