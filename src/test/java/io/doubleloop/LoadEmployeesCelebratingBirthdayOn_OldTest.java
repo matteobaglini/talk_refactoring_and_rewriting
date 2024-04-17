@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 // REFACTORING: introduce contract tests
 
+// REFACTORING STEP: pull members up (utility functions)
 public class LoadEmployeesCelebratingBirthdayOn_OldTest extends LoadEmployeesCelebratingBirthdayOnContractTest {
   private Path testDataPath;
 
