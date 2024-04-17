@@ -15,8 +15,12 @@ public class LoadEmployeesCelebratingBirthdayOn {
   }
 
   public List<Employee> execute() throws IOException {
-    // replace or not? that is the question :-)
-    return old.execute();
-    // return candidate.execute();
+    // replace or not?
+    // let's do an experiment!
+    return new Experiment("LoadEmployeesCelebratingBirthdayOn")
+        .use(() -> old.execute())
+        .candidate(() -> candidate.execute())
+        .publishResult((useResult, candidateResult) -> { /* write result data somewhere */ })
+        .run();
   }
 }
