@@ -33,9 +33,17 @@ public class LoadEmployeesCelebratingBirthdayOnProperties {
   }
 
   @Test
-  void demo() throws Exception {
-    final var employeeGen = arbitraryEmployee.apply(10);
-    Stream.continually(() -> employeeGen.apply(RNG.get())).take(100).stdout();
+  void canLoadAndParseRandomValues() throws Exception {
+    Property.def("generate file")
+        .forAll(arbitraryEmployee)
+        .suchThat(
+            employee -> {
+              final var filePath = employeeFile(List.of(header(), employee.toLine()));
+              new LoadEmployeesCelebratingBirthdayOn_Old(filePath, date("2024/10/08")).execute();
+              return true;
+            })
+        .check()
+        .assertIsSatisfied();
   }
 
   class ArbitraryEmployee implements Arbitrary<Employee> {
