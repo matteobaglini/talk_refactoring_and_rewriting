@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // REFACTORING: introduce contract tests
 
-// REFACTORING STEP: pull tests up
 public class LoadEmployeesCelebratingBirthdayOn_OldTest extends LoadEmployeesCelebratingBirthdayOnContractTest {
 
   @Override
