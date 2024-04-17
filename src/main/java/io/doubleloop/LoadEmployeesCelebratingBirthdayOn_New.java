@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
 
-public class LoadEmployeesCelebratingBirthdayOn_New implements LoadEmployeesCelebratingBirthdayOnContract {
+public class LoadEmployeesCelebratingBirthdayOn_New  {
 
   private final String fileName;
   private final LocalDate today;
@@ -18,7 +18,6 @@ public class LoadEmployeesCelebratingBirthdayOn_New implements LoadEmployeesCele
     this.today = today;
   }
 
-  @Override
   public List<Employee> execute() throws IOException {
     final int HEADER = 1;
     try {
