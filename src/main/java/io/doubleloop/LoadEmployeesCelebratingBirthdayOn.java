@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class LoadEmployeesCelebratingBirthdayOn {
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String str = in.readLine(); // skip header
     while ((str = in.readLine()) != null) {
-      var employee = parseLine(str);
+      var employee = Employee.parseLine(str);
 
       // Check birthday
       if (employee.isBirthday(today)) {
@@ -31,16 +30,5 @@ public class LoadEmployeesCelebratingBirthdayOn {
       }
     }
     return result;
-  }
-
-  // REFACTORING: Move method/function (https://refactoring.com/catalog/moveFunction.html)
-  private static Employee parseLine(String str) {
-    String[] employeeData = str.split(", ");
-    Employee employee = new Employee(
-        employeeData[1],
-        employeeData[0],
-        LocalDate.parse(employeeData[2], DateTimeFormatter.ofPattern("yyyy/MM/dd")),
-        employeeData[3]);
-    return employee;
   }
 }
