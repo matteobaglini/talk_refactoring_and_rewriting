@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 // REFACTORING: introduce contract tests
 
-// REFACTORING STEP: introduce template method pattern
+// REFACTORING STEP: create test suite for "new" implementation
 public class LoadEmployeesCelebratingBirthdayOn_OldTest extends LoadEmployeesCelebratingBirthdayOnContractTest {
 
   @Test
