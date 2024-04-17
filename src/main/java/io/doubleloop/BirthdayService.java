@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -19,6 +20,9 @@ public class BirthdayService {
 
     // REFACTORING: split loop (https://refactoring.com/catalog/splitLoop.html)
 
+    // REFACTORING STEP: declare and use accumulator
+    final var employeesCelebratingBirthday = new ArrayList<Employee>();
+
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String str = in.readLine(); // skip header
     while ((str = in.readLine()) != null) {
@@ -32,6 +36,8 @@ public class BirthdayService {
 
       // Check birthday
       if (employee.isBirthday(today)) {
+        employeesCelebratingBirthday.add(employee);
+        
         // Create message
         String recipient = employee.email();
         String body = "Happy Birthday, dear %NAME%".replace("%NAME%", employee.firstName());
