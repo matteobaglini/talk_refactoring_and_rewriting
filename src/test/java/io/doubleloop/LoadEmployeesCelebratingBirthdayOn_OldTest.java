@@ -14,8 +14,7 @@ import org.junit.jupiter.api.Test;
 
 // REFACTORING: introduce contract tests
 
-// REFACTORING STEP: extract interface
-public class LoadEmployeesCelebratingBirthdayOn_OldTest {
+public class LoadEmployeesCelebratingBirthdayOn_OldTest extends LoadEmployeesCelebratingBirthdayOnContractTest {
   private Path testDataPath;
 
   @BeforeEach
