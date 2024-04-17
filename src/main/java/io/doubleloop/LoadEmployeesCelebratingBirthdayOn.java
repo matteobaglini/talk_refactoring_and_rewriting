@@ -27,12 +27,7 @@ public class LoadEmployeesCelebratingBirthdayOn {
       // REFACTORING: extract method/function
 
       // Parse employee data
-      String[] employeeData = str.split(", ");
-      Employee employee = new Employee(
-          employeeData[1],
-          employeeData[0],
-          LocalDate.parse(employeeData[2], DateTimeFormatter.ofPattern("yyyy/MM/dd")),
-          employeeData[3]);
+      var employee = parseLine(str);
 
       // Check birthday
       if (employee.isBirthday(today)) {
@@ -40,5 +35,15 @@ public class LoadEmployeesCelebratingBirthdayOn {
       }
     }
     return result;
+  }
+
+  private static Employee parseLine(String str) {
+    String[] employeeData = str.split(", ");
+    Employee employee = new Employee(
+        employeeData[1],
+        employeeData[0],
+        LocalDate.parse(employeeData[2], DateTimeFormatter.ofPattern("yyyy/MM/dd")),
+        employeeData[3]);
+    return employee;
   }
 }
