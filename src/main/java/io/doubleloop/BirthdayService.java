@@ -18,7 +18,8 @@ public class BirthdayService {
   public void sendGreetings(String fileName, LocalDate today, String smtpHost, int smtpPort)
       throws IOException, MessagingException {
 
-    // NOTE: use the extracted method as indirection level and as primary bottleneck
+    // REFACTORING: Replace Method/Function with Object (https://refactoring.com/catalog/replaceFunctionWithCommand.html)
+
     final var employeesCelebratingBirthday = loadEmployeesCelebratingBirthdayOn(fileName, today);
 
     for (final var employee : employeesCelebratingBirthday) {
