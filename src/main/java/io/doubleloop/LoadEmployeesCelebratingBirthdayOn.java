@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+// REFACTORING: branch by abstraction (https://martinfowler.com/bliki/BranchByAbstraction.html)
+
+// REFACTOR STEP: create a copy of the "old" implementation :-)
 public class LoadEmployeesCelebratingBirthdayOn {
   private final String fileName;
   private final LocalDate today;
